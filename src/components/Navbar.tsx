@@ -130,7 +130,7 @@ function Navbar() {
       if (productData && productData.data.length > 0) {
         setProducts(productData.data);
       }
-    }, [productData]
+    }, [productData, setProducts]
   )
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -310,7 +310,7 @@ function Navbar() {
                       onClick={handleSearch}
                       className="w-full text-center text-sm font-medium text-red-600 hover:text-red-700 transition-colors"
                     >
-                      View all search results for "{searchQuery}"
+                      View all search results for &apos;{searchQuery}&apos;
                     </button>
                   </div>
                 )}
@@ -329,7 +329,7 @@ function Navbar() {
                   No products found
                 </h3>
                 <p className="text-xs text-gray-500 mb-3">
-                  We couldn't find any products matching "{searchQuery}"
+                  We couldn&apos;t find any products matching &apos;{searchQuery}&apos;
                 </p>
                 <button
                   onClick={handleSearch}

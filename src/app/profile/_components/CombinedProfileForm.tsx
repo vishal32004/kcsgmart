@@ -18,7 +18,7 @@ const combinedSchema = z.object({
   // Personal Info
   first_name: z.string().min(1, "First name is required"),
   last_name: z.string().min(1, "Last name is required"),
-  
+
   // Address fields
   Address: z.string().min(1, "Address is required").optional(),
   City: z.string().min(1, "City is required").optional(),
@@ -32,7 +32,7 @@ const combinedSchema = z.object({
   Shipping_Country: z.string().min(1, "Country is required").optional(),
   Shipping_PinCode: z.string().min(1, "Pincode is required").optional(),
   Shipping_Landmark: z.string().optional(),
-  
+
   // Company fields
   company_name: z.string().optional(),
   gst_no: z.string().regex(/^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/, "Invalid GST format").optional().or(z.literal("")),
@@ -66,7 +66,7 @@ export default function CombinedProfileForm({ userEmail }: { userEmail: string |
         // Personal Info
         first_name: data.Userdata.first_name || "",
         last_name: data.Userdata.last_name || "",
-        
+
         // Address fields
         Address: data.Registerdata.Address || "",
         City: data.Registerdata.City || "",
@@ -80,7 +80,7 @@ export default function CombinedProfileForm({ userEmail }: { userEmail: string |
         Shipping_Country: data.Registerdata.Shipping_Country || "",
         Shipping_PinCode: data.Registerdata.Shipping_PinCode || "",
         Shipping_Landmark: data.Registerdata.Shipping_Landmark || "",
-        
+
         // Company fields
         company_name: data.Registerdata.company_name || "",
         gst_no: data.Registerdata.gst_no || "",
@@ -102,7 +102,7 @@ export default function CombinedProfileForm({ userEmail }: { userEmail: string |
 
   const onSubmit = (formData: CombinedFormData) => {
     if (!userEmail || !isDirty) return;
-    
+
     // Get current data from API
     const currentRegisterData = data?.Registerdata || {} as RegisterData;
     const currentUserData = data?.Userdata || {} as UserData;
@@ -110,29 +110,29 @@ export default function CombinedProfileForm({ userEmail }: { userEmail: string |
     // Prepare complete payload with ALL fields
     const payload: UpdateProfilePayload = {
       email: userEmail,
-      
+
       // Personal Info (always include)
       first_name: formData.first_name,
       last_name: formData.last_name,
-      
+
       // Address fields (include all)
-      Address: formData.Address || currentRegisterData.Address || null,
-      City: formData.City || currentRegisterData.City || null,
-      State: formData.State || currentRegisterData.State || null,
-      Country: formData.Country || currentRegisterData.Country || null,
-      PinCode: formData.PinCode || currentRegisterData.PinCode || null,
-      Landmark: formData.Landmark || currentRegisterData.Landmark || null,
-      Shipping_Address: formData.Shipping_Address || currentRegisterData.Shipping_Address || null,
-      Shipping_City: formData.Shipping_City || currentRegisterData.Shipping_City || null,
-      Shipping_State: formData.Shipping_State || currentRegisterData.Shipping_State || null,
-      Shipping_Country: formData.Shipping_Country || currentRegisterData.Shipping_Country || null,
-      Shipping_PinCode: formData.Shipping_PinCode || currentRegisterData.Shipping_PinCode || null,
-      Shipping_Landmark: formData.Shipping_Landmark || currentRegisterData.Shipping_Landmark || null,
-      
+      Address: formData.Address || currentRegisterData.Address || '',
+      City: formData.City || currentRegisterData.City || '',
+      State: formData.State || currentRegisterData.State || '',
+      Country: formData.Country || currentRegisterData.Country || '',
+      PinCode: formData.PinCode || currentRegisterData.PinCode || '',
+      Landmark: formData.Landmark || currentRegisterData.Landmark || '',
+      Shipping_Address: formData.Shipping_Address || currentRegisterData.Shipping_Address || '',
+      Shipping_City: formData.Shipping_City || currentRegisterData.Shipping_City || '',
+      Shipping_State: formData.Shipping_State || currentRegisterData.Shipping_State || '',
+      Shipping_Country: formData.Shipping_Country || currentRegisterData.Shipping_Country || '',
+      Shipping_PinCode: formData.Shipping_PinCode || currentRegisterData.Shipping_PinCode || '',
+      Shipping_Landmark: formData.Shipping_Landmark || currentRegisterData.Shipping_Landmark || '',
+
       // Company fields (include all)
-      company_name: formData.company_name || currentRegisterData.company_name || null,
-      gst_no: formData.gst_no || currentRegisterData.gst_no || null,
-      pan_no: formData.pan_no || currentRegisterData.pan_no || null,
+      company_name: formData.company_name || currentRegisterData.company_name || '',
+      gst_no: formData.gst_no || currentRegisterData.gst_no || '',
+      pan_no: formData.pan_no || currentRegisterData.pan_no || '',
     };
 
     mutation.mutate(payload);
@@ -157,17 +157,17 @@ export default function CombinedProfileForm({ userEmail }: { userEmail: string |
           </CardTitle>
         </CardHeader>
         <CardContent className="grid md:grid-cols-2 gap-4">
-          <InputField 
-            label="First Name" 
-            id="first_name" 
-            register={register} 
+          <InputField
+            label="First Name"
+            id="first_name"
+            register={register}
             errors={errors}
             required
           />
-          <InputField 
-            label="Last Name" 
-            id="last_name" 
-            register={register} 
+          <InputField
+            label="Last Name"
+            id="last_name"
+            register={register}
             errors={errors}
             required
           />
@@ -224,17 +224,17 @@ export default function CombinedProfileForm({ userEmail }: { userEmail: string |
         <CardContent className="space-y-4">
           <InputField label="Company Name" id="company_name" register={register} />
           <div className="grid md:grid-cols-2 gap-4">
-            <InputField 
-              label="GST No." 
-              id="gst_no" 
-              register={register} 
+            <InputField
+              label="GST No."
+              id="gst_no"
+              register={register}
               errors={errors}
               description="Format: 22AAAAA0000A1Z5"
             />
-            <InputField 
-              label="PAN No." 
-              id="pan_no" 
-              register={register} 
+            <InputField
+              label="PAN No."
+              id="pan_no"
+              register={register}
               errors={errors}
               description="Format: AAAAA0000A"
             />

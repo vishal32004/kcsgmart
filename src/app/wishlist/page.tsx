@@ -20,6 +20,7 @@ import { useStore } from "@/store/store";
 import { QuantitySelector } from "@/components/QuantitySelector";
 import { fetchProductDetail } from "@/helpers/apiActions";
 import { useQueryClient } from "@tanstack/react-query";
+import Image from "next/image";
 
 const BASE_URL =
   process.env.NEXT_PUBLIC_IMAGE_URL || "https://www.kcsgmart.in/";
@@ -170,7 +171,7 @@ export default function WishlistPage() {
                 >
                   <CardHeader className="p-0">
                     <div className="relative aspect-square overflow-hidden">
-                      <img
+                      <Image
                         src={BASE_URL + product.image || "/placeholder.svg"}
                         alt={product.name}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
