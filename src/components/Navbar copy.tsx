@@ -26,7 +26,6 @@ import { useStore } from "@/store/store";
 import { toast } from "sonner";
 import { useShallow } from "zustand/react/shallow";
 import { ProductListData } from "@/types/product";
-import { BASE_URL } from "@/constant/data";
 
 function Navbar() {
   const router = useRouter();
@@ -273,7 +272,7 @@ function Navbar() {
                         <div className="flex-shrink-0 w-12 h-12 bg-gray-100 rounded-lg overflow-hidden">
                           {product.image ? (
                             <Image
-                              src={BASE_URL + product.image}
+                              src={product.image}
                               alt={product.name}
                               width={48}
                               height={48}
